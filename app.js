@@ -1,91 +1,64 @@
 
-let cart = JSON.parse(localStorage.getItem('metalcanvas_cart')) || [];
+let cart = JSON.parse(localStorage.getItem('metal_cart')) || [];
 
-// Initialize Page
-document.addEventListener('DOMContentLoaded', () => {
-    updateCartBadge();
-    renderProducts();
-    renderCart();
-});
-
-function updateCartBadge() {
-    const badge = document.getElementById('cart-count');
-    if (badge) badge.innerText = cart.length;
+function updateBadge() {
+    const b = document.getElementById('cart-count');
+    if(b) b.innerText = cart.length;
 }
 
-function renderProducts() {
-    const featuredGrid = document.getElementById('featured-grid');
-    const fullGrid = document.getElementById('full-product-grid');
-
-    if (featuredGrid) {
-        const featuredItems = products.filter(p => p.featured);
-        featuredGrid.innerHTML = featuredItems.map(p => createProductCard(p)).join('');
-    }
-
-    if (fullGrid) {
-        fullGrid.innerHTML = products.map(p => createProductCard(p)).join('');
-    }
-}
-
-function createProductCard(product) {
-    return `
+function renderHome() {
+    const list = document.getElementById('product-list');
+    if(!list) return;
+    list.innerHTML = products.map(p => `
         <div class="product-card">
-            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <img src="${p.image}">
             <div class="product-info">
-                <h3>${product.name}</h3>
-                <p class="product-price">Rs. ${product.price.toLocaleString()}</p>
-                <button onclick="addToCart(${product.id})" class="btn btn-primary" style="width:100%">Add to Cart</button>
+                <h3>${p.name}</h3>
+                <p class="price">Rs. ${p.price}</p>
+                <button class="btn btn-primary" onclick="addToCart(${p.id})">Add to Cart</button>
             </div>
         </div>
-    `;
+    `).join('');
 }
 
 function addToCart(id) {
-    const product = products.find(p => p.id === id);
-    cart.push(product);
-    localStorage.setItem('metalcanvas_cart', JSON.stringify(cart));
-    updateCartBadge();
-    alert(product.name + " added to your basket!");
+    const p = products.find(x => x.id === id);
+    cart.push(p);
+    localStorage.setItem('metal_cart', JSON.stringify(cart));
+    updateBadge();
+    alert("Added to cart!");
 }
 
 function renderCart() {
-    const cartList = document.getElementById('cart-items-list');
-    const summary = document.getElementById('cart-summary-box');
-    if (!cartList) return;
-
-    if (cart.length === 0) {
-        cartList.innerHTML = "<p>Your basket is empty. Go shop some art!</p>";
-        summary.style.display = "none";
+    const inv = document.getElementById('invoice-items');
+    if(!inv) return;
+    if(cart.length === 0) {
+        inv.innerHTML = "Your cart is empty.";
         return;
     }
-
-    cartList.innerHTML = cart.map((item, index) => `
-        <div class="cart-item">
-            <div>
-                <h4>${item.name}</h4>
-                <p style="color:var(--primary-accent)">Rs. ${item.price.toLocaleString()}</p>
-            </div>
-            <button onclick="removeFromCart(${index})" class="btn btn-secondary" style="padding: 5px 15px; border-color: #ef4444; color: #ef4444;">Remove</button>
-        </div>
-    `).join('');
-
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    document.getElementById('total-val').innerText = total.toLocaleString();
+    let total = cart.reduce((s, i) => s + i.price, 0);
+    inv.innerHTML = cart.map(i => `<div class="cart-item"><span>${i.name}</span><span>Rs. ${i.price}</span></div>`).join('') +
+                    `<div class="cart-item"><strong>TOTAL</strong><strong>Rs. ${total}</strong></div>`;
 }
 
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    localStorage.setItem('metalcanvas_cart', JSON.stringify(cart));
+function sendOrder() {
+    const name = document.getElementById('cust-name').value;
+    const addr = document.getElementById('cust-addr').value;
+    const pay = document.getElementById('pay-method').value;
+
+    if(!name || !addr) return alert("Please enter your details");
+
+    let total = cart.reduce((s, i) => s + i.price, 0);
+    let items = cart.map(i => `- ${i.name}`).join('%0A');
+
+    const msg = `*METAL CANVAS ORDER*%0A%0A*Customer:* ${name}%0A*Address:* ${addr}%0A*Payment:* ${pay}%0A%0A*Items:*%0A${items}%0A%0A*Total:* Rs. ${total}`;
+    
+    window.open(`https://wa.me/${contactInfo.whatsapp}?text=${msg}`);
+    localStorage.removeItem('metal_cart');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateBadge();
+    renderHome();
     renderCart();
-    updateCartBadge();
-}
-
-function checkoutToWhatsApp() {
-    const phone = "03310423620"; // Replace with your actual WhatsApp number
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    const itemNames = cart.map(i => i.name).join(', ');
-    
-    const message = `Hello MetalCanvas! I would like to place an order:%0A%0AItems: ${itemNames}%0A%0ATotal Price: Rs. ${total.toLocaleString()}%0A%0APlease let me know the delivery details.`;
-    
-    window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
-}
+});
