@@ -3,9 +3,9 @@
 const products = [
     {
         id: 1,
-        name: "Geometric Steel Deer",
+        name: "BBQ Grill",
         price: 8500,
-        image: "images/deer.jpg",
+        image: "images/image.jpg",
         featured: true
     },
     {
