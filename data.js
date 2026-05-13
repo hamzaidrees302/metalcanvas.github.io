@@ -27,20 +27,20 @@ const products = [
         name: "Artisan Plant Stand",
         price: 4200,
         image: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80",
-        featured: false
+        featured: true
     },
     {
         id: 5,
         name: "Minimalist Welding Lamp",
         price: 6800,
         image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80",
-        featured: false
+        featured: true
     },
      {
         id: 6,
         name: "BBQ Rotating Machine ",
         price: 6800,
         image: "https://unsplash.com/photos/silver-fork-on-fire-during-night-time-9Qs_9n2oSJo",
-        featured: false
+        featured: true
     }
 ];
