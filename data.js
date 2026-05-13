@@ -32,5 +32,5 @@ const products = [
 ];
 
 const contactInfo = {
-    whatsapp: "923000000000" // Replace with your actual number
+    whatsapp: "03310423620" // Replace with your actual number
 };
