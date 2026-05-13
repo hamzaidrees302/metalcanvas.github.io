@@ -39,7 +39,7 @@ const products = [
      {
         id: 6,
         name: "BBQ Rotating Machine ",
-        price: 6800,
+        price: 7000,
         image: "https://unsplash.com/photos/silver-fork-on-fire-during-night-time-9Qs_9n2oSJo",
         featured: true
     }
