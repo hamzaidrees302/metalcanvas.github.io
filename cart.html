@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | MetalCanvas</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Metal<span>Canvas</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Shop Art</a></li>
+                <li><a href="cart.html" class="active">Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="container cart-container">
+        <h1>Your Art Basket</h1>
+        <div id="cart-items-list" class="cart-list">
+            <!-- Items appear here -->
+        </div>
+        
+        <div class="cart-summary" id="cart-summary-box">
+            <h3>Order Summary</h3>
+            <div class="summary-line">
+                <span>Total Amount:</span>
+                <span class="total-price">Rs. <span id="total-val">0</span></span>
+            </div>
+            <button onclick="checkoutToWhatsApp()" class="btn btn-whatsapp">Send Order via WhatsApp</button>
+            <p class="note">* After clicking, a message will be prepared with your order details.</p>
+        </div>
+    </section>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
