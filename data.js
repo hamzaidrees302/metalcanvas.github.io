@@ -14,20 +14,6 @@ const products = [
         price: 25000,
         image: "images/table.jpg",
         featured: true
-    },
-    {
-        id: 3,
-        name: "Metal Wall Nameplate",
-        price: 3500,
-        image: "images/nameplate.jpg",
-        featured: true
-    },
-    {
-        id: 4,
-        name: "Artisan Plant Stand",
-        price: 4200,
-        image: "images/plant_stand.jpg",
-        featured: false
     }
 ];
 
