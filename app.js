@@ -81,7 +81,7 @@ function removeFromCart(index) {
 }
 
 function checkoutToWhatsApp() {
-    const phone = "923000000000"; // Replace with your actual WhatsApp number
+    const phone = "03310423620"; // Replace with your actual WhatsApp number
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     const itemNames = cart.map(i => i.name).join(', ');
     
