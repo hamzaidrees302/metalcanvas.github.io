@@ -33,7 +33,7 @@ const products = [
         id: 5,
         name: "BBQ Stand",
         price: 7000,
-        image: "https://unsplash.com/photos/silver-fork-on-fire-during-night-time-9Qs_9n2oSJo",
+        image: "images/image.jpg",
         featured: true
     }
    
